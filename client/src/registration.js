@@ -18,7 +18,11 @@ export default class Registration extends React.Component {
             .then(({ data }) => {
                 console.log("data:", data);
                 if (data.success === true) {
-                    location.replace("/");
+                    if (data.user_status) {
+                        location.replace("/family");
+                    } else {
+                        location.replace("/sitter");
+                    }
                 } else if (data.success === false) {
                     this.setState({
                         error: true,

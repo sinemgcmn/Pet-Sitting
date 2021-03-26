@@ -74,6 +74,7 @@ app.post("/registration", (req, res) => {
                 req.session.userId = rows[0].id;
                 res.json({
                     success: true,
+                    user_status: currentStatus,
                 });
             });
         });
