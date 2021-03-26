@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 export default class Registration extends React.Component {
     // class component
     constructor() {
-        super(); // this must be written where there is a constructor.
+        super();
         this.state = {
             error: false,
-        }; // a sthis has a parent constructor, we should bind the data wirth 'this'.
+        };
     }
 
     handleClick() {
@@ -31,18 +31,11 @@ export default class Registration extends React.Component {
     }
 
     handleChange(e) {
-        //To handle the changes coming from user interface, we should you HANDLECHANGE function and SETSTATE.
-        //setState() enqueues changes to the component state and tells React
-        //that this component and its children need to be re-rendered with the updated state.
-        // console.log("change is running");
         this.setState(
             {
                 [e.target.name]: e.target.value,
             },
-            // this callback runs after setState finishes updating state
-            // because we're logging state here in the callback, this means this
-            // log won't run until state has been updated, ensuring us that
-            // we're seeing the most updated log
+
             () => console.log("this state after setState:", this.state)
         );
     }
@@ -57,6 +50,14 @@ export default class Registration extends React.Component {
                     </h2>
                 )}
                 <div className="userForm">
+                    <select
+                        onChange={(e) => this.handleChange(e)}
+                        value={this.state.value}
+                        name="status"
+                    >
+                        <option value="sitter">Pet Sitter</option>
+                        <option value="family">Pet Family</option>
+                    </select>
                     <input
                         className="regInputs"
                         name="first"

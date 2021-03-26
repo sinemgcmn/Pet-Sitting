@@ -5,9 +5,12 @@ const db = require("./db");
 const { hash, compare } = require("./utils/bc.js");
 const cryptoRandomString = require("crypto-random-string");
 //hash pasword///
+///amazon mail service//
+const ses = require("./ses");
+///amazon mail service//
 //cookie//////
 const cookieSession = require("cookie-session");
-const csurf = require("csurf");
+// const csurf = require("csurf");
 //cookie//////
 ///essential setting
 const compression = require("compression");
@@ -21,12 +24,12 @@ app.use(
     })
 );
 
-app.use(csurf());
+// app.use(csurf());
 
-app.use(function (req, res, next) {
-    res.cookie("mytoken", req.csrfToken());
-    next();
-});
+// app.use(function (req, res, next) {
+//     res.cookie("mytoken", req.csrfToken());
+//     next();
+// });
 
 app.use(express.json());
 
@@ -36,26 +39,43 @@ app.use(express.static(path.join(__dirname, "..", "client", "public")));
 
 ////routes///////
 app.get("/welcome", (req, res) => {
+    // const { status } = req.body;
+    // var currentStatus = false;
+    // if (status == "family") {
+    //     currentStatus = true;
+    // }
     if (req.session.userId) {
         res.redirect("/");
+        // getPage(currentStatus, res);
     } else {
         res.sendFile(path.join(__dirname, "..", "client", "index.html"));
     }
 });
 
 app.post("/registration", (req, res) => {
-    const { first, last, email, password } = req.body;
+    const { status, first, last, email, password } = req.body;
+    // console.log("status", status);
+    console.log("req.body", req.body);
+    var currentStatus = false;
+    if (status == "family") {
+        currentStatus = true;
+    }
     if (first && last && email && password) {
+        console.log("sanity check");
         hash(password).then((hashedPassword) => {
-            db.userInputForReg(first, last, email, hashedPassword).then(
-                ({ rows }) => {
-                    // console.log(rows);
-                    req.session.userId = rows[0].id;
-                    res.json({
-                        success: true,
-                    });
-                }
-            );
+            db.userInputForReg(
+                currentStatus,
+                first,
+                last,
+                email,
+                hashedPassword
+            ).then(({ rows }) => {
+                console.log("userInputForReg", rows);
+                req.session.userId = rows[0].id;
+                res.json({
+                    success: true,
+                });
+            });
         });
     } else {
         res.json({
@@ -68,7 +88,7 @@ app.post("/login", (req, res) => {
     const { password, email } = req.body;
     if (email && password) {
         db.userInputForLog(email).then(({ rows }) => {
-            // console.log(rows);
+            console.log(rows);
             if (rows.length === 0) {
                 res.json({
                     success: false,
@@ -79,6 +99,7 @@ app.post("/login", (req, res) => {
                         req.session.userId = rows[0].id;
                         res.json({
                             success: true,
+                            user_status: rows[0].is_family,
                         });
                     } else {
                         res.json({
@@ -177,3 +198,15 @@ app.get("*", function (req, res) {
 app.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening.");
 });
+
+// function getPage(isFamily, res) {
+//     if (isFamily) {
+//         // if the user is NOT logged in, redirect them to /welcome, which is the only page
+//         // they're allowed to see
+//         res.redirect("/family");
+//     } else {
+//         // this runs if the user is logged in
+//         // in which case send back the HTML, after which start js kicks in and renders our p tag...
+//         res.redirect("/sitter");
+//     }
+// }
