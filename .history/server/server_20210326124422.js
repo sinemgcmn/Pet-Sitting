@@ -14,25 +14,16 @@ const compression = require("compression");
 const path = require("path");
 ///essential setting
 
+app.use(compression());
+
+app.use(express.static(path.join(__dirname, "..", "client", "public")));
+
 app.use(
     cookieSession({
         secret: `wingardium leviosa`,
         maxAge: 1000 * 60 * 60 * 24 * 14,
     })
 );
-
-app.use(csurf());
-
-app.use(function (req, res, next) {
-    res.cookie("mytoken", req.csrfToken());
-    next();
-});
-
-app.use(express.json());
-
-app.use(compression());
-
-app.use(express.static(path.join(__dirname, "..", "client", "public")));
 
 ////routes///////
 app.get("/welcome", (req, res) => {

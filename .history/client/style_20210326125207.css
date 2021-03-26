@@ -1,18 +1,6 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-}
-
 body {
     display: grid;
     min-height: 100vh;
     grid-template-rows: 100px 1fr 50px;
-}
-
-header {
-    background-color: rgb(211, 161, 55);
-}
-
-footer {
     background-color: rgb(211, 161, 55);
 }
