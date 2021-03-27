@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 export default class Registration extends React.Component {
     // class component
@@ -47,6 +48,22 @@ export default class Registration extends React.Component {
     render() {
         return (
             <div>
+                <Helmet>
+                    <link rel="stylesheet" href="registration.css" />
+                </Helmet>
+                <h1 className="headReg">
+                    Find a loving local pet sitter or dog sitter
+                </h1>
+                <h3 className="bottomReg">Who treats your pet like family</h3>
+                <video
+                    id="videoMV"
+                    poster="backgroundpic.jpeg"
+                    autoPlay
+                    muted
+                    loop
+                >
+                    <source src="/dog.mp4" type="video/mp4" />
+                </video>
                 {this.state.error && (
                     <h2 className="errorMsg">
                         Sorry, something went wrong.Please check your
@@ -55,6 +72,7 @@ export default class Registration extends React.Component {
                 )}
                 <div className="userForm">
                     <select
+                        className="regInputs"
                         onChange={(e) => this.handleChange(e)}
                         value={this.state.value}
                         name="status"
