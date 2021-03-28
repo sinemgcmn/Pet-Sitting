@@ -8,7 +8,9 @@ export default class Registration extends React.Component {
     constructor() {
         super();
         this.state = {
+            status: "sitter",
             error: false,
+            editModeIsOn: false,
         };
     }
 
@@ -70,47 +72,109 @@ export default class Registration extends React.Component {
                         information!
                     </h2>
                 )}
-                <div className="userForm">
-                    <select
-                        className="regInputs"
-                        onChange={(e) => this.handleChange(e)}
-                        value={this.state.value}
-                        name="status"
-                    >
-                        <option value="sitter">Pet Sitter</option>
-                        <option value="family">Pet Family</option>
-                    </select>
-                    <input
-                        className="regInputs"
-                        name="first"
-                        placeholder="first"
-                        onChange={(e) => this.handleChange(e)} // binding the changes/ not to get undefined
-                    />
-                    <input
-                        className="regInputs"
-                        name="last"
-                        placeholder="last"
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <input
-                        className="regInputs"
-                        name="email"
-                        placeholder="email"
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <input
-                        className="regInputs"
-                        name="password"
-                        placeholder="password"
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <button
-                        className="regButton"
-                        onClick={() => this.handleClick()}
-                    >
-                        Register
-                    </button>
-                </div>
+                {this.state.status == "sitter" && (
+                    <div className="userForm">
+                        <select
+                            className="regInputs"
+                            onChange={(e) => this.handleChange(e)}
+                            value={this.state.value}
+                            name="status"
+                        >
+                            <option selected value>
+                                {" "}
+                                -- select an option --{" "}
+                            </option>
+                            <option value="family">Pet Family</option>
+                            <option value="sitter">Become a Sitter</option>
+                        </select>
+
+                        <input
+                            className="regInputs"
+                            name="address"
+                            placeholder="address"
+                            onChange={(e) => this.handleChange(e)} // binding the changes/ not to get undefined
+                        />
+
+                        <input
+                            className="regInputs"
+                            name="first"
+                            placeholder="first"
+                            onChange={(e) => this.handleChange(e)} // binding the changes/ not to get undefined
+                        />
+                        <input
+                            className="regInputs"
+                            name="last"
+                            placeholder="last"
+                            onChange={(e) => this.handleChange(e)}
+                        />
+                        <input
+                            className="regInputs"
+                            name="email"
+                            placeholder="email"
+                            onChange={(e) => this.handleChange(e)}
+                        />
+                        <input
+                            className="regInputs"
+                            name="password"
+                            placeholder="password"
+                            onChange={(e) => this.handleChange(e)}
+                        />
+                        <button
+                            className="regButton"
+                            onClick={() => this.handleClick()}
+                        >
+                            Register
+                        </button>
+                    </div>
+                )}
+                {this.state.status != "sitter" && (
+                    <div className="userForm">
+                        <select
+                            className="regInputs"
+                            onChange={(e) => this.handleChange(e)}
+                            value={this.state.value}
+                            name="status"
+                        >
+                            <option selected value>
+                                {" "}
+                                -- select an option --{" "}
+                            </option>
+                            <option value="family">Pet Family</option>
+                            <option value="sitter">Become a Sitter</option>
+                        </select>
+
+                        <input
+                            className="regInputs"
+                            name="first"
+                            placeholder="first"
+                            onChange={(e) => this.handleChange(e)} // binding the changes/ not to get undefined
+                        />
+                        <input
+                            className="regInputs"
+                            name="last"
+                            placeholder="last"
+                            onChange={(e) => this.handleChange(e)}
+                        />
+                        <input
+                            className="regInputs"
+                            name="email"
+                            placeholder="email"
+                            onChange={(e) => this.handleChange(e)}
+                        />
+                        <input
+                            className="regInputs"
+                            name="password"
+                            placeholder="password"
+                            onChange={(e) => this.handleChange(e)}
+                        />
+                        <button
+                            className="regButton"
+                            onClick={() => this.handleClick()}
+                        >
+                            Register
+                        </button>
+                    </div>
+                )}
                 <Link className="loginMsg" to="/login">
                     If you are already registered, click here to Log in!
                 </Link>

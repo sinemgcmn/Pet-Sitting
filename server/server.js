@@ -71,26 +71,49 @@ app.get("/welcome", (req, res) => {
 });
 
 app.post("/registration", (req, res) => {
-    const { status, first, last, email, password } = req.body;
+    const { status, address, first, last, email, password } = req.body;
     // console.log("status", status);
-    // console.log("req.body", req.body);
+    console.log("req.body", req.body);
     var currentStatus = false;
     if (status == "family") {
         currentStatus = true;
-    }
-    if (first && last && email && password) {
-        // console.log("sanity check");
+        hash(password).then((hashedPassword) => {
+            db.userInputForRegFam(
+                currentStatus,
+                first,
+                last,
+                email,
+                hashedPassword
+            )
+                .then(({ rows }) => {
+                    console.log("userInputForRegFam", rows);
+                    req.session.userId = rows[0].id;
+                    res.json({
+                        success: true,
+                        user_status: currentStatus,
+                    });
+                })
+                .catch((err) => {
+                    console.log(
+                        "Error with adding user (server):",
+                        err.message
+                    );
+                    res.json({ success: false });
+                });
+        });
+    } else {
         hash(password)
             .then((hashedPassword) => {
-                db.userInputForReg(
+                db.userInputForRegSit(
                     currentStatus,
                     first,
                     last,
                     email,
+                    address,
                     hashedPassword
                 )
                     .then(({ rows }) => {
-                        // console.log("userInputForReg", rows);
+                        console.log("userInputForRegSit", rows);
                         req.session.userId = rows[0].id;
                         res.json({
                             success: true,
@@ -109,6 +132,8 @@ app.post("/registration", (req, res) => {
                 console.log("Error with hashing password:", err.message);
             });
     }
+
+    // console.log("sanity check");
 });
 
 app.post("/login", (req, res) => {
@@ -252,15 +277,16 @@ app.post("/reset/verify", (req, res) => {
 
 app.get("/sitter", (req, res) => {
     const userId = req.session.userId;
-    // console.log("req.session.userId:", userId);
+    console.log("req.session.userId:", userId);
     // console.log("userId:", userId);
-    if (req.session.userId) {
+    if (userId) {
         // console.log("I am here");
+
         db.selectUserInputForPic(userId)
-            .then(({ rows }) => {
-                // console.log(rows);
+            .then((result) => {
+                console.log(result);
                 res.json({
-                    success: rows,
+                    success: result.rows,
                 });
             })
             .catch((err) => {
@@ -357,16 +383,16 @@ app.post("/skills", (req, res) => {
         });
 });
 
-// app.post("/pet", (req, res) => {
-//     // console.log("I am coming from server");
-//     const { petDraft } = req.body;
-//     // console.log(req.body);
-//     const userId = req.session.userId;
-//     db.updatePetInfo(userId, petDraft).then(({ rows }) => {
-//         console.log(rows);
-//         res.json(rows);
-//     });
-// });
+app.post("/pet", (req, res) => {
+    // console.log("I am coming from server");
+    const { petDraft } = req.body;
+    // console.log(req.body);
+    const userId = req.session.userId;
+    db.updatePetInfo(userId, petDraft).then(({ rows }) => {
+        console.log(rows);
+        res.json(rows);
+    });
+});
 
 app.get("/logout", (req, res) => {
     console.log("I am from server and from logout");

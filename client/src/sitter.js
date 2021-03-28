@@ -3,7 +3,7 @@ import Presentational from "./presentational";
 import Service from "./service";
 import Home from "./home";
 import Skills from "./skills";
-// import Pet from "./pet";
+import Pet from "./pet";
 
 export default function Sitter(props) {
     console.log("props in Sitter:", props);
@@ -44,12 +44,12 @@ export default function Sitter(props) {
                         skills={props.skills}
                         updateSkills={(skills) => props.updateSkills(skills)}
                     />
-                    {/* <Pet
+                    <Pet
                         first={props.first}
                         last={props.last}
                         pet={props.pet}
                         updatePet={(pet) => props.updatePet(pet)}
-                    /> */}
+                    />
                 </div>
             </div>
         </>

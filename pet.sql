@@ -9,6 +9,7 @@ CREATE TABLE familysitters(
     last_name     VARCHAR NOT NULL CHECK (last_name <> ''),
     email         VARCHAR NOT NULL UNIQUE CHECK (email <> ''),
     password_hash VARCHAR NOT NULL CHECK (password_hash <> ''),
+    s_address     VARCHAR,
     services      VARCHAR,
     home          VARCHAR,
     skills        VARCHAR,

@@ -17,7 +17,7 @@ export default class App extends Component {
             services: "",
             home: "",
             skills: "",
-            // pet: "",
+            pet: "",
             id: "",
             uploaderIsVisible: false,
             isRequestEnded: false,
@@ -38,7 +38,7 @@ export default class App extends Component {
                         services: data.success[0].services,
                         home: data.success[0].home,
                         skills: data.success[0].skills,
-                        // pet: data.success[0].pet,
+                        pet: data.success[0].pet,
                         id: data.success[0].id,
                         isRequestEnded: true,
                     });
@@ -81,10 +81,10 @@ export default class App extends Component {
         this.setState({ skills: skills });
     }
 
-    // updatePet(pet) {
-    //     // console.log("Im running in App!!! and my argument is: ", pet);
-    //     this.setState({ pet: pet });
-    // }
+    updatePet(pet) {
+        // console.log("Im running in App!!! and my argument is: ", pet);
+        this.setState({ pet: pet });
+    }
 
     render() {
         return (
@@ -115,7 +115,7 @@ export default class App extends Component {
                                             services={this.state.services}
                                             home={this.state.home}
                                             skills={this.state.skills}
-                                            // pet={this.state.pet}
+                                            pet={this.state.pet}
                                             updateBio={(bio) =>
                                                 this.updateBio(bio)
                                             }
@@ -128,9 +128,9 @@ export default class App extends Component {
                                             updateSkills={(skills) =>
                                                 this.updateSkills(skills)
                                             }
-                                            // updatePet={(pet) =>
-                                            //     this.updatePet(pet)
-                                            // }
+                                            updatePet={(pet) =>
+                                                this.updatePet(pet)
+                                            }
                                         />
                                     )}
                                 />

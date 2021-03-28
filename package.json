@@ -6,9 +6,9 @@
     "scripts": {
         "build": "webpack --mode production",
         "dev:client": "webpack serve --mode development",
-        "dev:server": "nodemon --watch server --ignore server/uploads server/server.js",
+        "dev:server": "nodemon --watch server --ignore server/uploads  --ignore './client/' server/server.js ",
         "dev": "concurrently \"npm:dev:*\" --kill-others",
-        "start": "node server/server.js",
+        "start": "nodemon --ignore './client/' server/server.js",
         "test": "jest"
     },
     "engines": {

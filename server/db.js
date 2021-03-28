@@ -7,7 +7,24 @@ const db = spicedPg(
 
 ////////////PART-1//////REG AND LOG//////////////////
 
-module.exports.userInputForReg = (status, first, last, email, password) => {
+module.exports.userInputForRegSit = (
+    status,
+    address,
+    first,
+    last,
+    email,
+    password
+) => {
+    const q = `
+        INSERT INTO familysitters (is_family, s_address, first_name, last_name, email, password_hash)
+        VALUES ($1, $2, $3, $4, $5, $6)
+        RETURNING id;
+    `;
+    const params = [status, address, first, last, email, password];
+    return db.query(q, params);
+};
+
+module.exports.userInputForRegFam = (status, first, last, email, password) => {
     const q = `
         INSERT INTO familysitters (is_family, first_name, last_name, email, password_hash)
         VALUES ($1, $2, $3, $4, $5)
@@ -87,9 +104,9 @@ module.exports.selectFromResetCode = (secretCode) => {
 
 module.exports.selectUserInputForPic = (userId) => {
     const q = `
-        SELECT first_name, last_name, imageUrl, services, home, skills, bio, id
+        SELECT is_family, first_name, last_name, imageurl, services, home, skills, bio, pet, id
         FROM familysitters
-        WHERE id = $1;
+        WHERE id = '${userId}';
     `;
 
     const params = userId;
@@ -152,13 +169,13 @@ module.exports.updateSkillsInfo = (userId, skills) => {
     return db.query(q, params);
 };
 
-// module.exports.updatePetInfo = (userId, pets) => {
-//     const q = `
-//         UPDATE familysitters
-//         SET pet = $2
-//         WHERE id = $1
-//         RETURNING pet;
-//     `;
-//     const params = [userId, pets];
-//     return db.query(q, params);
-// };
+module.exports.updatePetInfo = (userId, pets) => {
+    const q = `
+        UPDATE familysitters
+        SET pet = $2
+        WHERE id = $1
+        RETURNING pet;
+    `;
+    const params = [userId, pets];
+    return db.query(q, params);
+};
