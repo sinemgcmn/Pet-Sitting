@@ -9,7 +9,11 @@ CREATE TABLE familysitters(
     last_name     VARCHAR NOT NULL CHECK (last_name <> ''),
     email         VARCHAR NOT NULL UNIQUE CHECK (email <> ''),
     password_hash VARCHAR NOT NULL CHECK (password_hash <> ''),
+    services      VARCHAR,
+    home          VARCHAR,
+    skills        VARCHAR,
     bio           VARCHAR,
+    pet           VARCHAR,
     imageurl      VARCHAR,
     created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

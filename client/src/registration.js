@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import axios from "./axios";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 
@@ -22,7 +22,7 @@ export default class Registration extends React.Component {
                     if (data.user_status) {
                         location.replace("/family");
                     } else {
-                        location.replace("/sitter");
+                        location.replace("/");
                     }
                 } else if (data.success === false) {
                     this.setState({

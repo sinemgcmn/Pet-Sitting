@@ -21,7 +21,7 @@ module.exports.userInputForLog = (email) => {
     const q = `
         SELECT is_family, email, password_hash, id
         FROM familysitters  
-        WHERE email = '${email}'
+        WHERE email = '${email}';
     `;
 
     const params = email;
@@ -30,9 +30,9 @@ module.exports.userInputForLog = (email) => {
 
 module.exports.selectInfoFromUsers = (email) => {
     const q = `
-        SELECT *
-        FROM familysitters  
-        WHERE email = $1;
+       SELECT *
+       FROM familysitters  
+       WHERE email = '${email}';
     `;
 
     const params = email;
@@ -64,7 +64,7 @@ module.exports.userCodeForReset = (secretCode) => {
 
 module.exports.updatePassword = (email, password) => {
     const q = `
-        UPDATE users
+        UPDATE familysitters
         SET password_hash = $2
         WHERE email = $1;
     `;
@@ -82,3 +82,83 @@ module.exports.selectFromResetCode = (secretCode) => {
     const params = secretCode;
     return db.query(q, params);
 };
+
+////////////PART-4////////PROFILE PIC////////////////
+
+module.exports.selectUserInputForPic = (userId) => {
+    const q = `
+        SELECT first_name, last_name, imageUrl, services, home, skills, bio, id
+        FROM familysitters
+        WHERE id = $1;
+    `;
+
+    const params = userId;
+    return db.query(q, params);
+};
+
+module.exports.updatePic = (userId, url) => {
+    const q = `
+        UPDATE familysitters
+        SET imageurl = $2
+        WHERE id = $1
+        RETURNING imageurl;
+    `;
+    const params = [userId, url];
+    return db.query(q, params);
+};
+
+////////////PART-5////////BIO////////////////
+module.exports.updateBioInfo = (userId, bio) => {
+    const q = `
+        UPDATE familysitters
+        SET bio = $2
+        WHERE id = $1
+        RETURNING bio;
+    `;
+    const params = [userId, bio];
+    return db.query(q, params);
+};
+
+module.exports.updateServiceInfo = (userId, service) => {
+    const q = `
+        UPDATE familysitters
+        SET services = $2
+        WHERE id = $1
+        RETURNING services;
+    `;
+    const params = [userId, service];
+    return db.query(q, params);
+};
+
+module.exports.updateHomeInfo = (userId, home) => {
+    const q = `
+        UPDATE familysitters
+        SET home = $2
+        WHERE id = $1
+        RETURNING home;
+    `;
+    const params = [userId, home];
+    return db.query(q, params);
+};
+
+module.exports.updateSkillsInfo = (userId, skills) => {
+    const q = `
+        UPDATE familysitters
+        SET skills = $2
+        WHERE id = $1
+        RETURNING skills;
+    `;
+    const params = [userId, skills];
+    return db.query(q, params);
+};
+
+// module.exports.updatePetInfo = (userId, pets) => {
+//     const q = `
+//         UPDATE familysitters
+//         SET pet = $2
+//         WHERE id = $1
+//         RETURNING pet;
+//     `;
+//     const params = [userId, pets];
+//     return db.query(q, params);
+// };
