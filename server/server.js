@@ -38,7 +38,6 @@ const uploader = multer({
         fileSize: 2097152,
     },
 });
-////aws//////
 
 app.use(
     cookieSession({
@@ -71,7 +70,16 @@ app.get("/welcome", (req, res) => {
 });
 
 app.post("/registration", (req, res) => {
-    const { status, address, first, last, email, password } = req.body;
+    const {
+        lan,
+        long,
+        status,
+        address,
+        first,
+        last,
+        email,
+        password,
+    } = req.body;
     // console.log("status", status);
     console.log("req.body", req.body);
     var currentStatus = false;
@@ -83,7 +91,9 @@ app.post("/registration", (req, res) => {
                 first,
                 last,
                 email,
-                hashedPassword
+                hashedPassword,
+                lan,
+                long
             )
                 .then(({ rows }) => {
                     console.log("userInputForRegFam", rows);
@@ -106,11 +116,13 @@ app.post("/registration", (req, res) => {
             .then((hashedPassword) => {
                 db.userInputForRegSit(
                     currentStatus,
+                    address,
                     first,
                     last,
                     email,
-                    address,
-                    hashedPassword
+                    hashedPassword,
+                    lan,
+                    long
                 )
                     .then(({ rows }) => {
                         console.log("userInputForRegSit", rows);
@@ -139,11 +151,11 @@ app.post("/registration", (req, res) => {
 app.post("/login", (req, res) => {
     const { password, email } = req.body;
     if (email && password) {
-        console.log(email);
-        console.log(password);
+        // console.log(email);
+        // console.log(password);
         db.userInputForLog(email)
             .then(({ rows }) => {
-                console.log(rows);
+                // console.log(rows);
                 if (rows.length === 0) {
                     res.json({
                         success: false,
@@ -284,7 +296,7 @@ app.get("/sitter", (req, res) => {
 
         db.selectUserInputForPic(userId)
             .then((result) => {
-                console.log(result);
+                // console.log(result);
                 res.json({
                     success: result.rows,
                 });
@@ -293,6 +305,15 @@ app.get("/sitter", (req, res) => {
                 console.log("Error with sitter:", err.message);
             });
     }
+});
+
+app.post("/search", (req, res) => {
+    const userId = req.session.userId;
+    const { place } = req.body;
+    console.log("req.body:", place);
+    res.json({
+        success: true,
+    });
 });
 
 app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {

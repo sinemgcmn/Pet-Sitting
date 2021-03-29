@@ -58,10 +58,10 @@ export default class Login extends React.Component {
                 <Helmet>
                     <link rel="stylesheet" href="login.css" />
                 </Helmet>
-                <h1 className="headReg">
-                    Find a loving local pet sitter or dog sitter
-                </h1>
-                <h3 className="bottomReg">Who treats your pet like family</h3>
+                <h1 className="headReg">Find a Loving and Local Pet Sitter</h1>
+                <h3 className="bottomReg">
+                    who treats your pet like family...
+                </h3>
                 <video
                     id="videoMV"
                     poster="backgroundpic.jpeg"

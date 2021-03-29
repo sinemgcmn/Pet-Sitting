@@ -13,24 +13,34 @@ module.exports.userInputForRegSit = (
     first,
     last,
     email,
-    password
+    password,
+    lan,
+    long
 ) => {
     const q = `
-        INSERT INTO familysitters (is_family, s_address, first_name, last_name, email, password_hash)
-        VALUES ($1, $2, $3, $4, $5, $6)
+        INSERT INTO familysitters (is_family, s_address, first_name, last_name, email, password_hash, lan, long)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
         RETURNING id;
     `;
-    const params = [status, address, first, last, email, password];
+    const params = [status, address, first, last, email, password, lan, long];
     return db.query(q, params);
 };
 
-module.exports.userInputForRegFam = (status, first, last, email, password) => {
+module.exports.userInputForRegFam = (
+    status,
+    first,
+    last,
+    email,
+    password,
+    lan,
+    long
+) => {
     const q = `
-        INSERT INTO familysitters (is_family, first_name, last_name, email, password_hash)
-        VALUES ($1, $2, $3, $4, $5)
+        INSERT INTO familysitters (is_family, first_name, last_name, email, password_hash, lan, long)
+        VALUES ($1, $2, $3, $4, $5, $6, $7)
         RETURNING id;
     `;
-    const params = [status, first, last, email, password];
+    const params = [status, first, last, email, password, lan, long];
     return db.query(q, params);
 };
 

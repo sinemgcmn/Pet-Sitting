@@ -8,14 +8,41 @@ export default class Registration extends React.Component {
     constructor() {
         super();
         this.state = {
+            place: "",
             status: "sitter",
             error: false,
             editModeIsOn: false,
+            flag: false,
+            lan: 0,
+            long: 0,
         };
+    }
+
+    componentDidUpdate() {
+        console.log("hazal", this.state.address);
+
+        if (this.state.address != undefined && !this.state.flag) {
+            fetch(
+                "https://nominatim.openstreetmap.org/search?q=" +
+                    this.state.address +
+                    "&limit=1&format=json"
+            )
+                .then((res) => res.json())
+                .then((data) => {
+                    this.state.flag = true;
+                    console.log(data);
+                    this.setState({
+                        place: data[0].display_name,
+                        lan: data[0].lat,
+                        long: data[0].lon,
+                    });
+                });
+        }
     }
 
     handleClick() {
         // console.log("clicked!");
+
         axios
             .post("/registration", this.state)
             .then(({ data }) => {
@@ -53,10 +80,10 @@ export default class Registration extends React.Component {
                 <Helmet>
                     <link rel="stylesheet" href="registration.css" />
                 </Helmet>
-                <h1 className="headReg">
-                    Find a loving local pet sitter or dog sitter
-                </h1>
-                <h3 className="bottomReg">Who treats your pet like family</h3>
+                <h1 className="headReg">Find a Loving and Local Pet Sitter</h1>
+                <h3 className="bottomReg">
+                    who treats your pet like family...
+                </h3>
                 <video
                     id="videoMV"
                     poster="backgroundpic.jpeg"

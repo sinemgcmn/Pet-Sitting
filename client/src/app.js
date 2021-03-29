@@ -5,11 +5,15 @@ import Family from "./family";
 import Sitter from "./sitter";
 import Presentational from "./presentational";
 import Uploader from "./uploader";
+import Search from "./search";
+
+// Geocode.setApiKey("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
 
 export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            place: null,
             first: "",
             last: "",
             imageUrl: "",
@@ -135,6 +139,7 @@ export default class App extends Component {
                                     )}
                                 />
                                 <Route path="/family" component={Family} />
+                                <Route path="/search" component={Search} />
                             </div>
                         )}
 
