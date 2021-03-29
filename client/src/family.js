@@ -1,32 +1,18 @@
 import React from "react";
 import axios from "./axios";
+import Search from "./search";
 
 export default class Family extends React.Component {
-    // class component
     constructor() {
         super(); // this must be written where there is a constructor.
         this.state = {
             error: false,
             place: [],
+            sitters: [],
         }; // a sthis has a parent constructor, we should bind the data wirth 'this'.
     }
 
-    // componentDidMount() {
-    //     // console.log("grandchild just mounted");
-    //     // console.log("props in grandchild", this.props);
-    //     if (this.props.bio) {
-    //         this.setState({
-    //             btnTxt: "edit",
-    //         });
-    //     } else {
-    //         this.setState({
-    //             btnTxt: "add",
-    //         });
-    //     }
-    // }
-
-    handleClick() {
-        console.log("this.state.place", this.state.place);
+    componentDidMount() {
         fetch(
             "https://nominatim.openstreetmap.org/search?q=" +
                 this.state.place +
@@ -37,12 +23,15 @@ export default class Family extends React.Component {
                 console.log(data);
                 this.setState({ place: data });
             });
-        axios.post("/search", { place: this.state.place }).then(({ data }) => {
-            if (data.success == true) {
-                location.replace("/search");
-            }
-            console.log("family is workingggg");
+    }
+
+    handleClick() {
+        axios.get("/search").then((result) => {
+            console.log("family is workingggg", result.data.success);
+            this.setState({ sitters: result.data.success });
         });
+
+        console.log("this.state.sitters", this.state.sitters);
     }
 
     handleChange(e) {
@@ -57,7 +46,7 @@ export default class Family extends React.Component {
 
     render() {
         return (
-            <div>
+            <>
                 <h1 className="headReg">Find a Loving and Local Pet Sitter</h1>
                 <h3 className="bottomReg">
                     who treats your pet like family...
@@ -69,10 +58,10 @@ export default class Family extends React.Component {
                         placeholder="search place"
                         onChange={(e) => this.handleChange(e)}
                     />
-
-                    <button onClick={() => this.handleClick()}>Search</button>
+                    <button onClick={() => this.handleClick()}>search</button>
                 </div>
-            </div>
+                <Search sitters={this.state.sitters} />
+            </>
         );
     }
 }

@@ -66,6 +66,16 @@ module.exports.selectInfoFromUsers = (email) => {
     return db.query(q, params);
 };
 
+module.exports.selectAllSitters = () => {
+    const q = `
+       SELECT *
+       FROM familysitters  
+       WHERE is_family = 'f';
+    `;
+
+    return db.query(q);
+};
+
 ////////////PART-3//////RESET//////////////////
 
 module.exports.userInputForReset = (email, secretCode) => {

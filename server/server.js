@@ -307,12 +307,13 @@ app.get("/sitter", (req, res) => {
     }
 });
 
-app.post("/search", (req, res) => {
+app.get("/search", (req, res) => {
     const userId = req.session.userId;
-    const { place } = req.body;
-    console.log("req.body:", place);
-    res.json({
-        success: true,
+    db.selectAllSitters().then((result) => {
+        console.log(result.rows);
+        res.json({
+            success: result.rows,
+        });
     });
 });
 

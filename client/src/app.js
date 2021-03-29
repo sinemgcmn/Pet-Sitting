@@ -139,7 +139,6 @@ export default class App extends Component {
                                     )}
                                 />
                                 <Route path="/family" component={Family} />
-                                <Route path="/search" component={Search} />
                             </div>
                         )}
 
