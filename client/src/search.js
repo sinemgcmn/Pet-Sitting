@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
@@ -6,15 +7,14 @@ export default class Search extends React.Component {
     constructor(props) {
         super(props); // this must be written where there is a constructor.
         this.state = {
-            currentLocation: { lat: 52.52, lng: 13.405 },
-            zoom: 13,
-
-            // a sthis has a parent constructor, we should bind the data wirth 'this'.
+            currentLocation: [52.52, 13.405],
+            zoom: 10,
         };
-        console.log("deneme", props);
     }
 
     render() {
+        console.log("hazal->>", this.props.sitters);
+        console.log("sinem->>", this.props.total);
         return (
             <div>
                 <MapContainer
@@ -27,16 +27,63 @@ export default class Search extends React.Component {
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
 
-                    <Marker position={[-74.0060152, 40.7127281]}>
-                        <Popup>
-                            A pretty CSS3 popup. <br /> Easily customizable.
-                        </Popup>
-                    </Marker>
-                    <Marker position={[52.52, 13.405]}>
-                        <Popup>Bizim.</Popup>
-                    </Marker>
+                    {this.getUsers().map((user, index) => (
+                        <Marker
+                            key={index}
+                            position={[`${user.lat}`, `${user.lon}`]}
+                        >
+                            <Popup>
+                                {user.first_name}
+
+                                <Link to={`/${user.id}`}>
+                                    <img src={user.imageurl} />
+                                </Link>
+                            </Popup>
+                        </Marker>
+                    ))}
                 </MapContainer>
             </div>
         );
     }
+
+    getUsers() {
+        var users = [];
+        for (var i = 0; i < this.props.sitters.length; i++) {
+            if (this.checkDistance(this.props.sitters[i])) {
+                users.push(this.props.sitters[i]);
+            }
+        }
+        return users;
+    }
+
+    checkDistance(user) {
+        // return distance in meters
+        var c = 0;
+        if (this.props.total.length > 0) {
+            var lon1 = this.toRadian(this.props.total[0].lon),
+                lat1 = this.toRadian(this.props.total[0].lat),
+                lon2 = this.toRadian(user.lon),
+                lat2 = this.toRadian(user.lat);
+
+            var deltaLat = lat2 - lat1;
+            var deltaLon = lon2 - lon1;
+
+            var a =
+                Math.pow(Math.sin(deltaLat / 2), 2) +
+                Math.cos(lat1) *
+                    Math.cos(lat2) *
+                    Math.pow(Math.sin(deltaLon / 2), 2);
+            c = 2 * Math.asin(Math.sqrt(a));
+            var EARTH_RADIUS = 6371;
+        }
+        if (10000 >= c * EARTH_RADIUS * 1000) {
+            return true;
+        }
+        return false;
+    }
+    toRadian(degree) {
+        return (degree * Math.PI) / 180;
+    }
 }
+
+// var distance = getDistance([lat1, lng1], [lat2, lng2]);

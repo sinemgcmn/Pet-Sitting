@@ -71,8 +71,8 @@ app.get("/welcome", (req, res) => {
 
 app.post("/registration", (req, res) => {
     const {
-        lan,
-        long,
+        lat,
+        lon,
         status,
         address,
         first,
@@ -92,8 +92,8 @@ app.post("/registration", (req, res) => {
                 last,
                 email,
                 hashedPassword,
-                lan,
-                long
+                lat,
+                lon
             )
                 .then(({ rows }) => {
                     console.log("userInputForRegFam", rows);
@@ -121,8 +121,8 @@ app.post("/registration", (req, res) => {
                     last,
                     email,
                     hashedPassword,
-                    lan,
-                    long
+                    lat,
+                    lon
                 )
                     .then(({ rows }) => {
                         console.log("userInputForRegSit", rows);
@@ -307,7 +307,7 @@ app.get("/sitter", (req, res) => {
     }
 });
 
-app.get("/search", (req, res) => {
+app.get("/api/search", (req, res) => {
     const userId = req.session.userId;
     db.selectAllSitters().then((result) => {
         console.log(result.rows);

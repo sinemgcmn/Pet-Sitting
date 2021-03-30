@@ -7,12 +7,13 @@ export default class Family extends React.Component {
         super(); // this must be written where there is a constructor.
         this.state = {
             error: false,
-            place: [],
+            place: "",
+            total: [],
             sitters: [],
         }; // a sthis has a parent constructor, we should bind the data wirth 'this'.
     }
 
-    componentDidMount() {
+    handleClick() {
         fetch(
             "https://nominatim.openstreetmap.org/search?q=" +
                 this.state.place +
@@ -21,17 +22,12 @@ export default class Family extends React.Component {
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
-                this.setState({ place: data });
+                this.setState({ total: data });
             });
-    }
-
-    handleClick() {
-        axios.get("/search").then((result) => {
+        axios.get("/api/search").then((result) => {
             console.log("family is workingggg", result.data.success);
             this.setState({ sitters: result.data.success });
         });
-
-        console.log("this.state.sitters", this.state.sitters);
     }
 
     handleChange(e) {
@@ -60,7 +56,7 @@ export default class Family extends React.Component {
                     />
                     <button onClick={() => this.handleClick()}>search</button>
                 </div>
-                <Search sitters={this.state.sitters} />
+                <Search sitters={this.state.sitters} total={this.state.total} />
             </>
         );
     }

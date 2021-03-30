@@ -13,8 +13,8 @@ export default class Registration extends React.Component {
             error: false,
             editModeIsOn: false,
             flag: false,
-            lan: 0,
-            long: 0,
+            lat: 0,
+            lonn: 0,
         };
     }
 
@@ -33,8 +33,8 @@ export default class Registration extends React.Component {
                     console.log(data);
                     this.setState({
                         place: data[0].display_name,
-                        lan: data[0].lat,
-                        long: data[0].lon,
+                        lat: data[0].lat,
+                        lon: data[0].lon,
                     });
                 });
         }

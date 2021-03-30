@@ -17,8 +17,8 @@ CREATE TABLE familysitters(
     pet           VARCHAR,
     imageurl      VARCHAR,
     created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    lan           DECIMAL,
-    long          DECIMAL
+    lat           DECIMAL,
+    lon          DECIMAL
 );
 
 CREATE TABLE reset_codes (
