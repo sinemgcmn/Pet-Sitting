@@ -34,6 +34,10 @@ export default class OtherProfile extends Component {
             <div className="searchRecent">
                 <div className="mostRecentOtherProfile">
                     <div className="otherProfile">
+                        <h1>
+                            {this.state.userInfo.first_name}{" "}
+                            {this.state.userInfo.last_name}
+                        </h1>
                         <img
                             className="mostRecentImg"
                             src={this.state.userInfo.imageurl}
@@ -42,18 +46,19 @@ export default class OtherProfile extends Component {
                                 this.state.userInfo.last_name
                             }`}
                         />
-                        <h1 className="mostRecentHeadlineOtherProfile">
-                            {this.state.userInfo.first_name}{" "}
-                            {this.state.userInfo.last_name}
-                            {this.state.userInfo.bio}
-                            {this.state.userInfo.home}
-                            {this.state.userInfo.pet}
-                            {this.state.userInfo.skills}
-                        </h1>
-
+                        <button>
+                            Contact to {this.state.userInfo.first_name}{" "}
+                        </button>
+                        <h1>About {this.state.userInfo.first_name}</h1>
+                        {this.state.userInfo.bio}
+                        <h1>{this.state.userInfo.first_name}'s Home</h1>
+                        {this.state.userInfo.home}
+                        <h1>Accepted Pets</h1>
+                        {this.state.userInfo.pet}
+                        <h1>{this.state.userInfo.first_name}'s Skills</h1>
+                        {this.state.userInfo.skills}
                         {/* <FriendButton id={this.props.match.params.id} /> */}
                     </div>
-                    <h1 className="otherBio">{this.state.userInfo.bio}</h1>
                 </div>
             </div>
         );

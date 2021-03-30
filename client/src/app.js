@@ -100,6 +100,7 @@ export default class App extends Component {
                                     last={this.state.last}
                                     imageUrl={this.state.imageUrl}
                                     toggleUploader={() => this.toggleUploader()}
+                                    classForImgSmall="profile-pic"
                                 />
                                 <Route
                                     exact
@@ -156,6 +157,7 @@ export default class App extends Component {
                                     this.updateImgUrlApp(imageUrl)
                                 }
                                 toggleUploader={() => this.toggleUploader()}
+                                classForImgBig="profile-big"
                             />
                         )}
                     </div>

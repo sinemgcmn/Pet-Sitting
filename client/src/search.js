@@ -34,10 +34,16 @@ export default class Search extends React.Component {
                         >
                             <Popup>
                                 {user.first_name}
+                                {user.last_name}
 
                                 <Link to={`/sitter/${user.id}`}>
-                                    <img src={user.imageurl} />
+                                    <img
+                                        className="searchPic"
+                                        src={user.imageurl}
+                                    />
                                 </Link>
+                                <p>About {user.first_name}🐶🐱😻</p>
+                                {user.bio}
                             </Popup>
                         </Marker>
                     ))}

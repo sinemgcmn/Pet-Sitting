@@ -67,6 +67,8 @@ export default class Service extends React.Component {
                 <h1>{this.props.first}'s services</h1>
                 <h3>At {this.props.first}'s home</h3>
                 <p>{this.props.services}</p>
+                <h3>At your home</h3>
+                <p>{this.props.services}</p>
 
                 {!this.state.editModeIsOn && (
                     <button
