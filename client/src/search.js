@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
 import React from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+// import { Map } from "./map";
+
+import {
+    MapContainer,
+    TileLayer,
+    Marker,
+    Popup,
+    // withLeaflet,
+} from "react-leaflet";
 
 export default class Search extends React.Component {
     // class component
@@ -13,6 +21,7 @@ export default class Search extends React.Component {
     }
 
     render() {
+        // const SearchBar = withLeaflet(Search);
         console.log("hazal->>", this.props.sitters);
         console.log("sinem->>", this.props.total);
         return (
@@ -26,6 +35,7 @@ export default class Search extends React.Component {
                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
+                    {/* <SearchBar /> */}
 
                     {this.getUsers().map((user, index) => (
                         <Marker

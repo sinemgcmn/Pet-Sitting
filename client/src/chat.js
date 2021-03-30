@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { socket } from "./socket";
 import { useSelector } from "react-redux";
 
-export function Chat() {
+export function Chat(props) {
     const privateMessages = useSelector((state) => state && state.messages);
     console.log("privateMessages", privateMessages);
 
@@ -30,14 +30,6 @@ export function Chat() {
     };
     return (
         <>
-            <h1 className="mostRecentHeadline">
-                We discuss feeding schedule & organization here
-            </h1>
-            <h3 className="chatHeadline">
-                Please do not post anything other than feeding schedule &
-                organization topic.
-            </h3>
-
             <div className="chat-container" ref={elemRef}>
                 {privateMessages &&
                     privateMessages.map((privateMessage, i) => {

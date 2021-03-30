@@ -1,6 +1,16 @@
 import React from "react";
 import axios from "./axios";
 import Search from "./search";
+// import { OpenStreetMapProvider } from "leaflet-geosearch";
+
+// const provider = new OpenStreetMapProvider();
+
+// const input = document.querySelector("input");
+// input.addEventListener("submit", async (event) => {
+//     event.preventDefault();
+//     const results = await provider.search({ query: this.state.place });
+//     console.log(results);
+// });
 
 export default class Family extends React.Component {
     constructor() {

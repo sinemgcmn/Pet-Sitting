@@ -7,6 +7,7 @@ import Presentational from "./presentational";
 import Uploader from "./uploader";
 import OtherProfile from "./otherProfile";
 import { Chat } from "./chat";
+import Rating from "./rating";
 
 export default class App extends Component {
     constructor(props) {
@@ -53,6 +54,12 @@ export default class App extends Component {
                     isRequestEnded: true,
                 });
             });
+    }
+
+    chatVisible() {
+        this.setState({
+            chatVisible: !this.state.chatVisible,
+        });
     }
 
     toggleUploader() {
@@ -139,7 +146,8 @@ export default class App extends Component {
                                     )}
                                 />
                                 <Route path="/family" component={Family} />
-                                <Route path="/chat" component={Chat} />
+                                <Route path="/rating" component={Rating} />
+                                {/* <Route path="/chat" component={Chat} /> */}
                                 <Route
                                     path="/sitter/:id"
                                     render={(props) => (
@@ -147,6 +155,9 @@ export default class App extends Component {
                                             key={props.match.url}
                                             match={props.match}
                                             history={props.history}
+                                            chatVisible={() =>
+                                                this.chatVisible()
+                                            }
                                         />
                                     )}
                                 />
@@ -161,6 +172,20 @@ export default class App extends Component {
                                 toggleUploader={() => this.toggleUploader()}
                                 classForImgBig="profile-big"
                             />
+                        )}
+
+                        {!this.state.chatVisible && (
+                            <div
+                                id="chatButton"
+                                onClick={() => this.chatVisible()}
+                            ></div>
+                        )}
+                        {this.state.chatVisible && (
+                            <div id="chatPopover">
+                                <Chat
+                                    chatVisible={this.chatVisible.bind(this)}
+                                />
+                            </div>
                         )}
                     </div>
                 </div>

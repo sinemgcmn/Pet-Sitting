@@ -1,5 +1,6 @@
 import { Component } from "react";
 import axios from "./axios";
+import Rating from "./rating";
 
 export default class OtherProfile extends Component {
     constructor(props) {
@@ -46,11 +47,12 @@ export default class OtherProfile extends Component {
                                 this.state.userInfo.last_name
                             }`}
                         />
-                        <a href="/chat">
+
+                        <h3 onClick={() => this.props.chatVisible()}>
                             {" "}
                             Click here to contact with{" "}
                             {this.state.userInfo.first_name}{" "}
-                        </a>
+                        </h3>
 
                         <h1>About {this.state.userInfo.first_name}</h1>
                         {this.state.userInfo.bio}
@@ -61,6 +63,7 @@ export default class OtherProfile extends Component {
                         <h1>{this.state.userInfo.first_name}'s Skills</h1>
                         {this.state.userInfo.skills}
                         {/* <FriendButton id={this.props.match.params.id} /> */}
+                        <Rating />
                     </div>
                 </div>
             </div>
