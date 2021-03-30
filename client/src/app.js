@@ -5,9 +5,7 @@ import Family from "./family";
 import Sitter from "./sitter";
 import Presentational from "./presentational";
 import Uploader from "./uploader";
-import Search from "./search";
-
-// Geocode.setApiKey("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+import OtherProfile from "./otherProfile";
 
 export default class App extends Component {
     constructor(props) {
@@ -139,6 +137,16 @@ export default class App extends Component {
                                     )}
                                 />
                                 <Route path="/family" component={Family} />
+                                <Route
+                                    path="/sitter/:id"
+                                    render={(props) => (
+                                        <OtherProfile
+                                            key={props.match.url}
+                                            match={props.match}
+                                            history={props.history}
+                                        />
+                                    )}
+                                />
                             </div>
                         )}
 

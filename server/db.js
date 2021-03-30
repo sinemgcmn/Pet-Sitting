@@ -124,7 +124,7 @@ module.exports.selectFromResetCode = (secretCode) => {
 
 module.exports.selectUserInputForPic = (userId) => {
     const q = `
-        SELECT is_family, first_name, last_name, imageurl, services, home, skills, bio, pet, id
+        SELECT * 
         FROM familysitters
         WHERE id = '${userId}';
     `;

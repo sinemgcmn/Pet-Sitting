@@ -310,7 +310,7 @@ app.get("/sitter", (req, res) => {
 app.get("/api/search", (req, res) => {
     const userId = req.session.userId;
     db.selectAllSitters().then((result) => {
-        console.log(result.rows);
+        // console.log(result.rows);
         res.json({
             success: result.rows,
         });
@@ -352,7 +352,7 @@ app.post("/bio", (req, res) => {
     console.log("bio", bioDraft);
     db.updateBioInfo(userId, bioDraft)
         .then(({ rows }) => {
-            console.log(rows);
+            // console.log(rows);
             res.json(rows);
         })
         .catch((err) => {
@@ -382,7 +382,7 @@ app.post("/home", (req, res) => {
     const userId = req.session.userId;
     db.updateHomeInfo(userId, homeDraft)
         .then(({ rows }) => {
-            console.log(rows);
+            // console.log(rows);
             res.json(rows);
         })
         .catch((err) => {
@@ -411,9 +411,25 @@ app.post("/pet", (req, res) => {
     // console.log(req.body);
     const userId = req.session.userId;
     db.updatePetInfo(userId, petDraft).then(({ rows }) => {
-        console.log(rows);
+        // console.log(rows);
         res.json(rows);
     });
+});
+
+app.post("/otherSitters", (req, res) => {
+    const userId = req.body.id;
+    if (userId == req.session.userId) {
+        res.json({
+            success: false,
+        });
+    } else {
+        db.selectUserInputForPic(userId).then((result) => {
+            console.log(result.rows);
+            res.json({
+                success: result.rows,
+            });
+        });
+    }
 });
 
 app.get("/logout", (req, res) => {

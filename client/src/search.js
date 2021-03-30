@@ -35,7 +35,7 @@ export default class Search extends React.Component {
                             <Popup>
                                 {user.first_name}
 
-                                <Link to={`/${user.id}`}>
+                                <Link to={`/sitter/${user.id}`}>
                                     <img src={user.imageurl} />
                                 </Link>
                             </Popup>
