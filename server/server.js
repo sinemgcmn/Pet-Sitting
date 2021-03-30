@@ -16,8 +16,14 @@ const csurf = require("csurf");
 const compression = require("compression");
 const path = require("path");
 ///essential setting
+//socket IO
+const server = require("http").Server(app);
+const io = require("socket.io")(server, {
+    allowRequest: (req, callback) =>
+        callback(null, req.headers.referer.startsWith("http://localhost:3000")),
+});
+//socket IO
 ///aws///
-
 const multer = require("multer");
 const uidSafe = require("uid-safe");
 const s3 = require("./s3");
@@ -39,12 +45,22 @@ const uploader = multer({
     },
 });
 
-app.use(
-    cookieSession({
-        secret: `wingardium leviosa`,
-        maxAge: 1000 * 60 * 60 * 24 * 14,
-    })
-);
+// app.use(
+//     cookieSession({
+//         secret: `wingardium leviosa`,
+//         maxAge: 1000 * 60 * 60 * 24 * 14,
+//     })
+// );
+////socket IO
+const cookieSessionMiddleware = cookieSession({
+    secret: `wingardium leviosa`,
+    maxAge: 1000 * 60 * 60 * 24 * 14,
+});
+app.use(cookieSessionMiddleware);
+io.use(function (socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
+////socket IO
 
 app.use(csurf());
 
@@ -451,6 +467,63 @@ app.get("*", function (req, res) {
     }
 });
 
-app.listen(process.env.PORT || 3001, function () {
+server.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening.");
+});
+
+io.on("connection", (socket) => {
+    const userId = socket.request.session.userId;
+    console.log("userid in socket", userId);
+    console.log("socketId in socket", socket.id);
+    console.log(`Socket with id: ${socket.id} has connected!`);
+
+    if (!socket.request.session.userId) {
+        return socket.disconnect(true);
+    }
+
+    db.selectMessage(socket.request.session.userId)
+        .then(({ rows }) => {
+            console.log("privateMessages", rows);
+            io.sockets.sockets.get(socket.id).emit("privateMessages", {
+                messages: rows,
+            });
+        })
+        .catch((err) => console.log(err));
+
+    //////////////////
+
+    socket.on("privateMessage", function (data) {
+        const { recipient, info } = data;
+        const sender = socket.request.session.userId;
+        const new_message = {};
+
+        db.saveMessage(sender, recipient, info)
+            .then(({ rows }) => {
+                const { sender_id, recipient_id, info, id } = rows[0];
+
+                new_message.info = info;
+                new_message.sender_id = sender_id;
+                new_message.recipient_id = recipient_id;
+                new_message.messages_id = id;
+
+                db.getId(sender_id).then(({ rows }) => {
+                    const { username, imageurl } = rows[0];
+                    new_message.first_name = username;
+                    new_message.imageurl = imageurl;
+                    console.log("private message inhalt", new_message);
+                    io.sockets.sockets
+                        .get(socket.id)
+                        .emit("privateMessage", new_message);
+                });
+            })
+            .catch((err) => console.log(err));
+    });
+
+    ////////////////////
+
+    //Confirm the user is logged in by finding the user's id in socket.request.session.
+
+    socket.on("disconnect", () => {
+        // console.log(`Socket with id: ${socket.id} just DISCONNECTED!`);
+    });
 });

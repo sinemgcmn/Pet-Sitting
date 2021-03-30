@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS reset_codes;
 DROP TABLE IF EXISTS familysitters;
 
@@ -25,5 +26,13 @@ CREATE TABLE reset_codes (
     id            SERIAL PRIMARY KEY,
     email         VARCHAR NOT NULL UNIQUE REFERENCES familysitters (email),
     secret_code   VARCHAR NOT NULL,
+    created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE messages ( 
+    id            SERIAL PRIMARY KEY, 
+    sender_id     INT REFERENCES familysitters(id) NOT NULL,
+    recipient_id  INT REFERENCES familysitters(id) NOT NULL, 
+    info          VARCHAR, 
     created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

@@ -46,9 +46,12 @@ export default class OtherProfile extends Component {
                                 this.state.userInfo.last_name
                             }`}
                         />
-                        <button>
-                            Contact to {this.state.userInfo.first_name}{" "}
-                        </button>
+                        <a href="/chat">
+                            {" "}
+                            Click here to contact with{" "}
+                            {this.state.userInfo.first_name}{" "}
+                        </a>
+
                         <h1>About {this.state.userInfo.first_name}</h1>
                         {this.state.userInfo.bio}
                         <h1>{this.state.userInfo.first_name}'s Home</h1>

@@ -199,3 +199,34 @@ module.exports.updatePetInfo = (userId, pets) => {
     const params = [userId, pets];
     return db.query(q, params);
 };
+
+module.exports.selectMessage = (sender) => {
+    const q = `
+        SELECT familysitters.id, familysitters.imageurl, familysitters.first_name, familysitters.last_name, messages.id AS messages_id, messages.sender_id, messages.recipient_id, messages.info
+        FROM messages
+        JOIN familysitters
+        ON (messages.sender_id= $1 AND messages.sender_id = familysitters.id)
+        OR (messages.recipient_id = $1 AND messages.sender_id = familysitters.id) 
+        ORDER BY messages.id DESC
+        LIMIT 10
+    `;
+
+    const params = [sender];
+    return db.query(q, params);
+};
+
+module.exports.saveMessage = (sender, recipient, info) => {
+    const q = `INSERT INTO messages (sender_id, recipient_id, info)
+                VALUES($1, $2, $3)
+                RETURNING *;`;
+    const params = [sender, recipient, info];
+    return db.query(q, params);
+};
+
+module.exports.getId = (id) => {
+    const q = `SELECT *
+               FROM users
+               WHERE id = $1;`;
+    const params = [id];
+    return db.query(q, params);
+};

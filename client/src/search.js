@@ -8,7 +8,7 @@ export default class Search extends React.Component {
         super(props); // this must be written where there is a constructor.
         this.state = {
             currentLocation: [52.52, 13.405],
-            zoom: 10,
+            zoom: 13,
         };
     }
 

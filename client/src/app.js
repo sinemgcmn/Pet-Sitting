@@ -6,6 +6,7 @@ import Sitter from "./sitter";
 import Presentational from "./presentational";
 import Uploader from "./uploader";
 import OtherProfile from "./otherProfile";
+import { Chat } from "./chat";
 
 export default class App extends Component {
     constructor(props) {
@@ -138,6 +139,7 @@ export default class App extends Component {
                                     )}
                                 />
                                 <Route path="/family" component={Family} />
+                                <Route path="/chat" component={Chat} />
                                 <Route
                                     path="/sitter/:id"
                                     render={(props) => (
