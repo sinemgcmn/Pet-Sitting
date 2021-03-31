@@ -15,14 +15,25 @@ module.exports.userInputForRegSit = (
     email,
     password,
     lat,
-    lon
+    lon,
+    rate
 ) => {
     const q = `
-        INSERT INTO familysitters (is_family, s_address, first_name, last_name, email, password_hash, lat, lon)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+        INSERT INTO familysitters (is_family, s_address, first_name, last_name, email, password_hash, lat, lon, rate)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
         RETURNING id;
     `;
-    const params = [status, address, first, last, email, password, lat, lon];
+    const params = [
+        status,
+        address,
+        first,
+        last,
+        email,
+        password,
+        lat,
+        lon,
+        rate,
+    ];
     return db.query(q, params);
 };
 
@@ -156,6 +167,26 @@ module.exports.updateBioInfo = (userId, bio) => {
     return db.query(q, params);
 };
 
+module.exports.updateRateInfoWithUser = (userId, rate) => {
+    const q = `
+        UPDATE familysitters
+        SET rate = $2 , counter_rate = counter_rate + 1
+        WHERE id = $1
+        RETURNING *;
+    `;
+    const params = [userId, rate];
+    return db.query(q, params);
+};
+
+module.exports.getRateInfo = (userId) => {
+    const q = `
+        SELECT rate, counter_rate 
+        FROM familysitters  
+          WHERE id = $1;
+    `;
+    const params = [userId];
+    return db.query(q, params);
+};
 module.exports.updateServiceInfo = (userId, service) => {
     const q = `
         UPDATE familysitters

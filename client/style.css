@@ -129,7 +129,126 @@ bio {
     margin-left: 10px;
 }
 
-.otherProfile > .mostRecentImg {
+.otherProfile {
+    padding: 10px;
+}
+.otherProfile > .info-block > .mostRecentImg {
+    max-width: 410px;
+    max-height: 250px;
+    display: block;
+    margin: 20px auto;
+
+    box-shadow: 10px 10px 10px #ccc;
+    -moz-box-shadow: 10px 10px 5px #ccc;
+    -webkit-box-shadow: 10px 10px 5px #ccc;
+    -khtml-box-shadow: 10px 10px 5px #ccc;
+}
+
+.otherProfile > .info-block > .block > h2 {
+    color: #0081a7;
+    padding-bottom: 10px;
+}
+.otherProfile > .info-block > .block {
+    text-align: justify;
+}
+
+.otherProfile > h1,
+.otherProfile > h3 {
+    display: inline-block;
+}
+
+.otherProfile > h3 {
+    margin-left: 10px;
+}
+.otherProfile > .info-block {
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 20px;
+}
+
+/* /////
+
+/////
+
+
+//// */
+
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+fieldset,
+label {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 1.5em;
+    margin: 10px;
+}
+
+/****** Style Star Rating Widget *****/
+
+.rating {
+    border: none;
+    float: left;
+    margin-left: 20px;
+}
+
+.rating > input {
+    display: none;
+}
+.rating > label:before {
+    margin: 5px;
+    font-size: 1.25em;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005";
+}
+
+.rating > .half:before {
+    content: "\f089";
+    position: absolute;
+}
+
+.rating > label {
+    color: #ddd;
+    float: right;
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label {
+    color: #ffd700;
+} /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label {
+    color: #ffed85;
+}
+.present {
+    float: none;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.present > label {
+    color: #ffd700;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.rateButton {
+    color: white;
+    background-color: #0081a7;
+    border: 1px solid #0081a7;
+    border-radius: 5px;
     width: 100px;
-    height: auto;
+    margin-left: 10px;
+    margin-top: 6px;
 }

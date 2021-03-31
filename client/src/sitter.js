@@ -16,21 +16,27 @@ export default function Sitter(props) {
             </Helmet>
             <div className="mostRecentProfile">
                 <div className="searchProfile">
-                    <h1 className="mostRecentHeadlineProfile">
-                        {props.first} {props.last}{" "}
-                    </h1>
+                    <div className="user-info">
+                        <h1 className="mostRecentHeadlineProfile">
+                            {props.first} {props.last}{" "}
+                        </h1>
+                        <div className="rating present">
+                            <label className="full"> {props.rate}</label>
+                        </div>
+                        <h3
+                            className="check-msg"
+                            onClick={() => props.chatVisible()}
+                        >
+                            {" "}
+                            Check your message{" "}
+                        </h3>
+                    </div>
 
                     <Presentational
                         imageUrl={props.imageUrl}
                         toggleUploader={props.toggleUploader}
                     />
-                    <h3
-                        className="check-msg"
-                        onClick={() => props.chatVisible()}
-                    >
-                        {" "}
-                        Check your message{" "}
-                    </h3>
+
                     <div className="info-block">
                         <BioEditor
                             first={props.first}

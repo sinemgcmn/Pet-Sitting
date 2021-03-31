@@ -85,6 +85,7 @@ export default class Login extends React.Component {
                         onChange={(e) => this.handleChange(e)}
                     />
                     <input
+                        type="password"
                         className="regInputs"
                         name="password"
                         placeholder="password"

@@ -19,7 +19,9 @@ CREATE TABLE familysitters(
     imageurl      VARCHAR,
     created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     lat           DECIMAL,
-    lon          DECIMAL
+    lon           DECIMAL,
+    rate          DECIMAL DEFAULT 0,
+    counter_rate  INT DEFAULT 0
 );
 
 CREATE TABLE reset_codes (
@@ -36,3 +38,4 @@ CREATE TABLE messages (
     info          VARCHAR, 
     created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+

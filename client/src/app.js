@@ -7,7 +7,7 @@ import Presentational from "./presentational";
 import Uploader from "./uploader";
 import OtherProfile from "./otherProfile";
 import { Chat } from "./chat";
-import Rating from "./rating";
+// import Rate from "./rate";
 
 export default class App extends Component {
     constructor(props) {
@@ -23,6 +23,7 @@ export default class App extends Component {
             skills: "",
             pet: "",
             id: "",
+            rate: "",
             uploaderIsVisible: false,
             isRequestEnded: false,
         };
@@ -45,6 +46,7 @@ export default class App extends Component {
                         pet: data.success[0].pet,
                         id: data.success[0].id,
                         isRequestEnded: true,
+                        rate: data.success[0].rate,
                     });
                 }
             })
@@ -127,6 +129,7 @@ export default class App extends Component {
                                             home={this.state.home}
                                             skills={this.state.skills}
                                             pet={this.state.pet}
+                                            rate={this.state.rate}
                                             updateBio={(bio) =>
                                                 this.updateBio(bio)
                                             }
@@ -149,7 +152,6 @@ export default class App extends Component {
                                     )}
                                 />
                                 <Route path="/family" component={Family} />
-                                <Route path="/rating" component={Rating} />
 
                                 {/* <Route path="/chat" component={Chat} /> */}
                                 <Route

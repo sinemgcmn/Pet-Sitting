@@ -143,6 +143,7 @@ export default class Registration extends React.Component {
                             onChange={(e) => this.handleChange(e)}
                         />
                         <input
+                            type="password"
                             className="regInputs"
                             name="password"
                             placeholder="password"
@@ -193,6 +194,7 @@ export default class Registration extends React.Component {
                             onChange={(e) => this.handleChange(e)}
                         />
                         <input
+                            type="password"
                             className="regInputs"
                             name="password"
                             placeholder="password"

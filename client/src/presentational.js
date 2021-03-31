@@ -1,6 +1,4 @@
 export default function Presentational({
-    first,
-    last,
     imageUrl,
     toggleUploader,
     classForImgSmall,

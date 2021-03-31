@@ -433,6 +433,7 @@ app.post("/pet", (req, res) => {
 });
 
 app.post("/otherSitters", (req, res) => {
+    console.log("otherpro", req.body);
     const userId = req.body.id;
     if (userId == req.session.userId) {
         res.json({
@@ -443,6 +444,31 @@ app.post("/otherSitters", (req, res) => {
             console.log(result.rows);
             res.json({
                 success: result.rows,
+            });
+        });
+    }
+});
+
+app.post("/rateUpdate", (req, res) => {
+    const userId = req.body.id;
+    const value = req.body.value;
+    if (userId == req.session.userId) {
+        res.json({
+            success: false,
+        });
+    } else {
+        db.getRateInfo(userId, value).then(({ rows }) => {
+            console.log("rows", rows[0]);
+            var currentRate = rows[0].rate;
+            var counter = rows[0].counter_rate;
+            db.updateRateInfoWithUser(
+                userId,
+                calculateRate(currentRate, value, counter)
+            ).then((result) => {
+                // console.log("updateRateInfo", result.rows);
+                res.json({
+                    success: result.rows,
+                });
             });
         });
     }
@@ -466,6 +492,16 @@ app.get("*", function (req, res) {
         res.sendFile(path.join(__dirname, "..", "client", "index.html"));
     }
 });
+
+function calculateRate(currentRate, value, counter) {
+    if (counter == 0) {
+        return value;
+    }
+    var result =
+        (currentRate * parseInt(counter) + parseInt(value)) /
+        (parseInt(counter) + 1);
+    return (Math.round(result * 100) / 100).toFixed(2);
+}
 
 server.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening.");
