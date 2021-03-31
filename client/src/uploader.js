@@ -42,11 +42,15 @@ export default class Uploader extends Component {
 
     render() {
         return (
-            <div>
+            <div className="uploader-popup">
                 <div className="uploader-text">
-                    <h1 onClick={() => this.toggleUploaderMod()}>X</h1>
-                    <h2>Want to change your image?</h2>
-
+                    <p
+                        className="popup-close-button"
+                        onClick={() => this.toggleUploaderMod()}
+                    >
+                        X
+                    </p>
+                    <p>Want to change your image?</p>
                     <input
                         onChange={(e) => this.handleChange(e)}
                         type="file"

@@ -1,0 +1,65 @@
+header {
+    background-color: #00afb9;
+}
+
+.header > div {
+    margin-right: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.bottomReg-family,
+.headReg-family {
+    color: #0081a7;
+}
+
+.family-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.userForm {
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.regInputs {
+    padding: 10px;
+    width: 250px;
+    height: 40px;
+    border: 2px solid #0081a7;
+    width: 350px;
+}
+button {
+    margin-left: 10px;
+    height: 30px;
+    border: 1px solid #0081a7;
+    color: #0081a7;
+    background-color: #fed9b7;
+    border-radius: 10px;
+    width: 80px;
+}
+
+.about-sitter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-name {
+    color: #0081a7;
+}
+
+.about-text {
+    align-self: flex-start;
+}
+.about-bio {
+    text-align: justify;
+}
+.leaflet-container a.leaflet-popup-close-button {
+    color: #0081a7;
+}

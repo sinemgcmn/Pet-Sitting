@@ -64,34 +64,36 @@ export default class Pet extends React.Component {
     render() {
         return (
             <>
-                <h1>Accepted Pets</h1>
-                <p>{this.props.pet}</p>
+                <div className="block">
+                    <h2>Accepted Pets</h2>
 
-                {!this.state.editModeIsOn && (
-                    <button
-                        onClick={() => this.togglePetEditor()}
-                        onChange={(e) => this.handleChange(e)}
-                        className="friendButtonProfile "
-                    >
-                        {this.state.btnTxt}
-                    </button>
-                )}
-
-                {this.state.editModeIsOn && (
-                    <div>
-                        <textarea
-                            onChange={(e) => this.handleChange(e)}
-                            defaultValue={this.props.pet}
-                        />
+                    {!this.state.editModeIsOn && (
                         <button
-                            className="friendButtonProfile "
+                            onClick={() => this.togglePetEditor()}
                             onChange={(e) => this.handleChange(e)}
-                            onClick={() => this.updatePetInEditor()}
+                            className="friendButtonProfile "
                         >
-                            Save
+                            {this.state.btnTxt}
                         </button>
-                    </div>
-                )}
+                    )}
+
+                    {this.state.editModeIsOn && (
+                        <div>
+                            <textarea
+                                onChange={(e) => this.handleChange(e)}
+                                defaultValue={this.props.pet}
+                            />
+                            <button
+                                className="friendButtonProfile "
+                                onChange={(e) => this.handleChange(e)}
+                                onClick={() => this.updatePetInEditor()}
+                            >
+                                Save
+                            </button>
+                        </div>
+                    )}
+                    <p>{this.props.pet}</p>
+                </div>
             </>
         );
     }

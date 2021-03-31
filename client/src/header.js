@@ -1,9 +1,11 @@
 export default function Header() {
     return (
-        <div>
-            <a href="/logout">Log out</a>
-            <div className="headerPart">
-                <p>Pet sitter</p>
+        <div className="header">
+            <img className="logo" src="logo.jpeg" alt="logo" />
+            <div className="header-part">
+                <a href="/logout">Log out</a>
+                <a href="/login">Log in</a>
+                <a href="/register">Register</a>
             </div>
         </div>
     );

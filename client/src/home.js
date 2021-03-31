@@ -64,36 +64,37 @@ export default class Home extends React.Component {
     render() {
         return (
             <>
-                <h1>{this.props.first}'s Home</h1>
+                <div className="block">
+                    <h2>{this.props.first}'s Home</h2>
 
-                <p>{this.props.home}</p>
-
-                {!this.state.editModeIsOn && (
-                    <button
-                        onClick={() => this.toggleHomeEditor()}
-                        onChange={(e) => this.handleChange(e)}
-                        className="friendButtonProfile "
-                    >
-                        {this.state.btnTxt}
-                    </button>
-                )}
-
-                {this.state.editModeIsOn && (
-                    <div>
-                        <textarea
-                            onChange={(e) => this.handleChange(e)}
-                            defaultValue={this.props.home}
-                        />
-
+                    {!this.state.editModeIsOn && (
                         <button
-                            className="friendButtonProfile "
+                            onClick={() => this.toggleHomeEditor()}
                             onChange={(e) => this.handleChange(e)}
-                            onClick={() => this.updateHomeinEditor()}
+                            className="friendButtonProfile "
                         >
-                            Save
+                            {this.state.btnTxt}
                         </button>
-                    </div>
-                )}
+                    )}
+
+                    {this.state.editModeIsOn && (
+                        <div>
+                            <textarea
+                                onChange={(e) => this.handleChange(e)}
+                                defaultValue={this.props.home}
+                            />
+
+                            <button
+                                className="friendButtonProfile "
+                                onChange={(e) => this.handleChange(e)}
+                                onClick={() => this.updateHomeinEditor()}
+                            >
+                                Save
+                            </button>
+                        </div>
+                    )}
+                    <p>{this.props.home}</p>
+                </div>
             </>
         );
     }

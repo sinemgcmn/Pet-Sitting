@@ -142,11 +142,15 @@ export default class App extends Component {
                                             updatePet={(pet) =>
                                                 this.updatePet(pet)
                                             }
+                                            chatVisible={() =>
+                                                this.chatVisible()
+                                            }
                                         />
                                     )}
                                 />
                                 <Route path="/family" component={Family} />
                                 <Route path="/rating" component={Rating} />
+
                                 {/* <Route path="/chat" component={Chat} /> */}
                                 <Route
                                     path="/sitter/:id"

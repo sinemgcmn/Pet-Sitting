@@ -64,34 +64,36 @@ export default class Skills extends React.Component {
     render() {
         return (
             <>
-                <h1> {this.props.first}'s Skills</h1>
-                <p>{this.props.skills}</p>
+                <div className="block">
+                    <h2> {this.props.first}'s Skills</h2>
 
-                {!this.state.editModeIsOn && (
-                    <button
-                        onClick={() => this.toggleSkillsEditor()}
-                        onChange={(e) => this.handleChange(e)}
-                        className="friendButtonProfile "
-                    >
-                        {this.state.btnTxt}
-                    </button>
-                )}
-
-                {this.state.editModeIsOn && (
-                    <div>
-                        <textarea
-                            onChange={(e) => this.handleChange(e)}
-                            defaultValue={this.props.bio}
-                        />
+                    {!this.state.editModeIsOn && (
                         <button
-                            className="friendButtonProfile "
+                            onClick={() => this.toggleSkillsEditor()}
                             onChange={(e) => this.handleChange(e)}
-                            onClick={() => this.updateSkillInEditor()}
+                            className="friendButtonProfile "
                         >
-                            Save
+                            {this.state.btnTxt}
                         </button>
-                    </div>
-                )}
+                    )}
+
+                    {this.state.editModeIsOn && (
+                        <div>
+                            <textarea
+                                onChange={(e) => this.handleChange(e)}
+                                defaultValue={this.props.bio}
+                            />
+                            <button
+                                className="friendButtonProfile "
+                                onChange={(e) => this.handleChange(e)}
+                                onClick={() => this.updateSkillInEditor()}
+                            >
+                                Save
+                            </button>
+                        </div>
+                    )}
+                    <p>{this.props.skills}</p>
+                </div>
             </>
         );
     }

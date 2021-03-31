@@ -19,8 +19,6 @@ export default class Registration extends React.Component {
     }
 
     componentDidUpdate() {
-        console.log("hazal", this.state.address);
-
         if (this.state.address != undefined && !this.state.flag) {
             fetch(
                 "https://nominatim.openstreetmap.org/search?q=" +
@@ -80,8 +78,10 @@ export default class Registration extends React.Component {
                 <Helmet>
                     <link rel="stylesheet" href="registration.css" />
                 </Helmet>
-                <h1 className="headReg">Find a Loving and Local Pet Sitter</h1>
-                <h3 className="bottomReg">
+                <h1 className="headReg headReg-reg">
+                    Find a Loving and Local Pet Sitter
+                </h1>
+                <h3 className="bottomReg bottomReg-reg">
                     who treats your pet like family...
                 </h3>
                 <video
@@ -106,11 +106,13 @@ export default class Registration extends React.Component {
                             onChange={(e) => this.handleChange(e)}
                             value={this.state.value}
                             name="status"
+                            defaultValue={"DEFAULT"}
                         >
-                            <option selected value>
+                            <option value="DEFAULT">
                                 {" "}
                                 -- select an option --{" "}
                             </option>
+
                             <option value="family">Pet Family</option>
                             <option value="sitter">Become a Sitter</option>
                         </select>
@@ -161,11 +163,13 @@ export default class Registration extends React.Component {
                             onChange={(e) => this.handleChange(e)}
                             value={this.state.value}
                             name="status"
+                            defaultValue={"DEFAULT"}
                         >
-                            <option selected value>
+                            <option value="DEFAULT">
                                 {" "}
                                 -- select an option --{" "}
                             </option>
+
                             <option value="family">Pet Family</option>
                             <option value="sitter">Become a Sitter</option>
                         </select>
@@ -203,7 +207,7 @@ export default class Registration extends React.Component {
                     </div>
                 )}
                 <Link className="loginMsg" to="/login">
-                    If you are already registered, click here to Log in!
+                    Already registered?
                 </Link>
             </div>
         );

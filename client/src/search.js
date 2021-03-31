@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import React from "react";
-// import { Map } from "./map";
-
+import { Helmet } from "react-helmet";
 import {
     MapContainer,
     TileLayer,
@@ -21,9 +20,6 @@ export default class Search extends React.Component {
     }
 
     render() {
-        // const SearchBar = withLeaflet(Search);
-        console.log("hazal->>", this.props.sitters);
-        console.log("sinem->>", this.props.total);
         return (
             <div>
                 <MapContainer
@@ -43,17 +39,21 @@ export default class Search extends React.Component {
                             position={[`${user.lat}`, `${user.lon}`]}
                         >
                             <Popup>
-                                {user.first_name}
-                                {user.last_name}
-
-                                <Link to={`/sitter/${user.id}`}>
-                                    <img
-                                        className="searchPic"
-                                        src={user.imageurl}
-                                    />
-                                </Link>
-                                <p>About {user.first_name}🐶🐱😻</p>
-                                {user.bio}
+                                <div className="about-sitter">
+                                    <p className="about-name">
+                                        {user.first_name} {user.last_name}
+                                    </p>
+                                    <Link to={`/sitter/${user.id}`}>
+                                        <img
+                                            className="searchPic"
+                                            src={user.imageurl}
+                                        />
+                                    </Link>
+                                    <p className="about-text">
+                                        About {user.first_name}🐶🐱😻
+                                    </p>
+                                    <div className="about-bio"> {user.bio}</div>
+                                </div>
                             </Popup>
                         </Marker>
                     ))}

@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "./axios";
 import Search from "./search";
+import { Helmet } from "react-helmet";
+
 // import { OpenStreetMapProvider } from "leaflet-geosearch";
 
 // const provider = new OpenStreetMapProvider();
@@ -53,19 +55,29 @@ export default class Family extends React.Component {
     render() {
         return (
             <>
-                <h1 className="headReg">Find a Loving and Local Pet Sitter</h1>
-                <h3 className="bottomReg">
-                    who treats your pet like family...
-                </h3>
-                <div className="userForm">
-                    <input
-                        className="regInputs"
-                        name="email"
-                        placeholder="search place"
-                        onChange={(e) => this.handleChange(e)}
-                    />
-                    <button onClick={() => this.handleClick()}>search</button>
+                <Helmet>
+                    <link rel="stylesheet" href="family.css" />
+                </Helmet>
+                <div className="family-container">
+                    <h1 className="headReg headReg-family">
+                        Find a Loving and Local Pet Sitter
+                    </h1>
+                    <h3 className="bottomReg bottomReg-family">
+                        who treats your pet like family...
+                    </h3>
+                    <div className="userForm">
+                        <input
+                            className="regInputs"
+                            name="email"
+                            placeholder="search place"
+                            onChange={(e) => this.handleChange(e)}
+                        />
+                        <button onClick={() => this.handleClick()}>
+                            search
+                        </button>
+                    </div>
                 </div>
+
                 <Search sitters={this.state.sitters} total={this.state.total} />
             </>
         );

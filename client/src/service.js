@@ -64,37 +64,39 @@ export default class Service extends React.Component {
     render() {
         return (
             <>
-                <h1>{this.props.first}'s services</h1>
-                <h3>At {this.props.first}'s home</h3>
-                <p>{this.props.services}</p>
-                <h3>At your home</h3>
-                <p>{this.props.services}</p>
+                <div className="block">
+                    <h2>{this.props.first}'s services</h2>
 
-                {!this.state.editModeIsOn && (
-                    <button
-                        onClick={() => this.toggleServiceEditor()}
-                        onChange={(e) => this.handleChange(e)}
-                        className="friendButtonProfile "
-                    >
-                        {this.state.btnTxt}
-                    </button>
-                )}
-
-                {this.state.editModeIsOn && (
-                    <div>
-                        <textarea
-                            onChange={(e) => this.handleChange(e)}
-                            defaultValue={this.props.services}
-                        />
+                    {!this.state.editModeIsOn && (
                         <button
-                            className="friendButtonProfile "
+                            onClick={() => this.toggleServiceEditor()}
                             onChange={(e) => this.handleChange(e)}
-                            onClick={() => this.updateServicesInEditor()}
+                            className="friendButtonProfile "
                         >
-                            Save
+                            {this.state.btnTxt}
                         </button>
-                    </div>
-                )}
+                    )}
+
+                    {this.state.editModeIsOn && (
+                        <div>
+                            <textarea
+                                onChange={(e) => this.handleChange(e)}
+                                defaultValue={this.props.services}
+                            />
+                            <button
+                                className="friendButtonProfile "
+                                onChange={(e) => this.handleChange(e)}
+                                onClick={() => this.updateServicesInEditor()}
+                            >
+                                Save
+                            </button>
+                        </div>
+                    )}
+                    <h3>At {this.props.first}'s home</h3>
+                    <p>{this.props.services}</p>
+                    <h3>At your home</h3>
+                    <p>{this.props.services}</p>
+                </div>
             </>
         );
     }

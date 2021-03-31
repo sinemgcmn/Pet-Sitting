@@ -64,34 +64,36 @@ export default class BioEditor extends React.Component {
     render() {
         return (
             <>
-                <h1>About {this.props.first}</h1>
-                <p>{this.props.bio}</p>
+                <div className="block">
+                    <h2>About {this.props.first}</h2>
 
-                {!this.state.editModeIsOn && (
-                    <button
-                        onClick={() => this.toggleBioEditor()}
-                        onChange={(e) => this.handleChange(e)}
-                        className="friendButtonProfile "
-                    >
-                        {this.state.btnTxt}
-                    </button>
-                )}
-
-                {this.state.editModeIsOn && (
-                    <div>
-                        <textarea
-                            onChange={(e) => this.handleChange(e)}
-                            defaultValue={this.props.bio}
-                        />
+                    {!this.state.editModeIsOn && (
                         <button
-                            className="friendButtonProfile "
+                            onClick={() => this.toggleBioEditor()}
                             onChange={(e) => this.handleChange(e)}
-                            onClick={() => this.updateBioinEditor()}
+                            className="friendButtonProfile "
                         >
-                            Save
+                            {this.state.btnTxt}
                         </button>
-                    </div>
-                )}
+                    )}
+
+                    {this.state.editModeIsOn && (
+                        <div>
+                            <textarea
+                                onChange={(e) => this.handleChange(e)}
+                                defaultValue={this.props.bio}
+                            />
+                            <button
+                                className="friendButtonProfile "
+                                onChange={(e) => this.handleChange(e)}
+                                onClick={() => this.updateBioinEditor()}
+                            >
+                                Save
+                            </button>
+                        </div>
+                    )}
+                    <p>{this.props.bio}</p>
+                </div>
             </>
         );
     }

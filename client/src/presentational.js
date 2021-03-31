@@ -9,7 +9,7 @@ export default function Presentational({
 
     imageUrl = imageUrl || "default.jpeg";
     return (
-        <div>
+        <div className="profile-picture-container">
             <img
                 onClick={toggleUploader}
                 className={classForImgSmall}

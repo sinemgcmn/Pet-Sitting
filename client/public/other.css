@@ -1,0 +1,13 @@
+.otherProfile > .mostRecentImg {
+    width: 100px;
+    height: auto;
+}
+header {
+    background-color: #00afb9;
+}
+
+.header > div {
+    margin-right: 70px;
+    display: flex;
+    align-items: center;
+}

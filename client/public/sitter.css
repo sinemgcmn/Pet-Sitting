@@ -1,0 +1,66 @@
+.searchProfile > .profile-picture-container {
+    display: none;
+}
+
+header {
+    background-color: #00afb9;
+}
+
+.header > div {
+    margin-right: 70px;
+    display: flex;
+    align-items: center;
+}
+
+.searchProfile {
+    margin: 20px;
+}
+
+.uploader-popup {
+    border: 5px solid #f07167;
+    border-radius: 10px;
+    width: 600px;
+    height: 145px;
+    position: absolute;
+    top: 50%;
+    right: 33%;
+    background-color: white;
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    color: #0081a7;
+}
+
+.uploader-popup > .uploader-text > .popup-close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.uploader-popup .uploader-text > p {
+    font-size: 24px;
+    display: inline;
+}
+
+.uploader-popup > .uploader-text > input {
+    margin: 30px;
+}
+
+h2 {
+    display: inline;
+
+    color: #0081a7;
+}
+h3 {
+    color: #5390d9;
+}
+textarea {
+    width: 350px;
+    height: 150px;
+    margin-top: 10px;
+    border: 2px solid red;
+}
+
+.otherProfile > .mostRecentImg {
+    width: 100px;
+    height: auto;
+}
