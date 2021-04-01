@@ -35,7 +35,6 @@ export default class OtherProfile extends Component {
     }
 
     updateRate() {
-        console.log("rateUpdate1", this.state.value);
         axios
             .post("/rateUpdate", {
                 id: this.props.match.params.id,
@@ -45,7 +44,7 @@ export default class OtherProfile extends Component {
                 if (data.success == false) {
                     this.props.history.push("/");
                 } else {
-                    console.log("rateUpdate:", data);
+                    console.log("datafromotherprofile:", data);
 
                     this.setState({ userInfo: data.success[0] });
                 }

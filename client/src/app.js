@@ -169,7 +169,6 @@ export default class App extends Component {
                                 />
                             </div>
                         )}
-
                         {this.state.uploaderIsVisible && (
                             <Uploader
                                 updateImgUrlApp={(imageUrl) =>
@@ -179,17 +178,19 @@ export default class App extends Component {
                                 classForImgBig="profile-big"
                             />
                         )}
-
                         {!this.state.chatVisible && (
                             <div
                                 id="chatButton"
                                 onClick={() => this.chatVisible()}
                             ></div>
                         )}
+                        x
                         {this.state.chatVisible && (
                             <div id="chatPopover">
                                 <Chat
                                     chatVisible={this.chatVisible.bind(this)}
+                                    senderId={this.state.id}
+                                    recipientId={this.state.id}
                                 />
                             </div>
                         )}

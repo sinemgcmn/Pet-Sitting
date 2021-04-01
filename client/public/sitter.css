@@ -53,12 +53,6 @@ h2 {
 h3 {
     color: #5390d9;
 }
-textarea {
-    width: 350px;
-    height: 150px;
-    margin-top: 10px;
-    border: 2px solid red;
-}
 
 .otherProfile > .mostRecentImg {
     width: 100px;

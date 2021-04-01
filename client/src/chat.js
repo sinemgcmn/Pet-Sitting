@@ -3,7 +3,15 @@ import { socket } from "./socket";
 import { useSelector } from "react-redux";
 
 export function Chat(props) {
-    const privateMessages = useSelector((state) => state && state.messages);
+    const privateMessages = useSelector((state) => {
+        if (
+            state &&
+            state.private_messages &&
+            state.private_messages.messages
+        ) {
+            return state.private_messages.messages;
+        }
+    });
     console.log("privateMessages", privateMessages);
 
     const elemRef = useRef();
@@ -24,8 +32,11 @@ export function Chat(props) {
         if (e.key === "Enter") {
             e.preventDefault();
             console.log("e.target.value:", e.target.value);
-            socket.emit("privateMessages", e.target.value);
-            e.target.value = "";
+            socket.emit("privateMessage", {
+                sender: props.senderId,
+                recipient: props.recipientId,
+                info: e.target.value,
+            });
         }
     };
     return (

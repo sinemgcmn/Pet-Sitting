@@ -108,16 +108,25 @@ bio {
 
 #chatPopover {
     position: absolute;
-    top: 33%;
+    top: 20%;
     left: 36%;
-    border: 5px solid red;
+    border: 5px solid #0081a7;
     width: 450px;
-    height: 300px;
-    background-color: lightblue;
+    height: 500px;
+    background-color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    padding: 10px;
+}
+#chatPopover > textarea {
+    width: 350px;
+    height: 150px;
+    margin-top: 10px;
+    border: 2px solid #0081a7;
+}
+#chatPopover > .chat-container > div > .chatName {
+    font-weight: bold;
 }
 
 .mostRecentHeadlineProfile {

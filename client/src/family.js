@@ -33,7 +33,7 @@ export default class Family extends React.Component {
         )
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
+                console.log("data", data);
                 this.setState({ total: data });
             });
         axios.get("/api/search").then((result) => {

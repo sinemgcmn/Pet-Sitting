@@ -529,8 +529,9 @@ io.on("connection", (socket) => {
     //////////////////
 
     socket.on("privateMessage", function (data) {
-        const { recipient, info } = data;
-        const sender = socket.request.session.userId;
+        console.log("newPrivateData", data);
+        const { recipient, info, sender } = data;
+
         const new_message = {};
 
         db.saveMessage(sender, recipient, info)

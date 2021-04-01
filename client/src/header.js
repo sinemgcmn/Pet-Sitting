@@ -6,6 +6,7 @@ export default function Header() {
                 <a href="/logout">Log out</a>
                 <a href="/login">Log in</a>
                 <a href="/register">Register</a>
+                {/* <a href="/chat">Chat</a> */}
             </div>
         </div>
     );

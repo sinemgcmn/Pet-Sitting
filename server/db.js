@@ -256,7 +256,7 @@ module.exports.saveMessage = (sender, recipient, info) => {
 
 module.exports.getId = (id) => {
     const q = `SELECT *
-               FROM users
+               FROM familysitters
                WHERE id = $1;`;
     const params = [id];
     return db.query(q, params);
