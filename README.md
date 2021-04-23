@@ -2,7 +2,7 @@
 
 ## Pet Sitting App for pet sitters and pet families need a pet sitter nearby their location 🐈
 
-React-based authenticated app with the features, registeration as a pet sitter or a pet family, landing to different homepages, finding the pet sitters close to a pet family, viewing the pet sitter profiles, rating system and chat functionality.
+React-based authenticated app with the features, registration as a pet sitter or a pet family, landing to different homepages, finding the pet sitters close to a pet family, viewing the pet sitter profiles, rating system and chat functionality.
 
 <img src="https://media.giphy.com/media/SKYhO1UWcoDfjkBT3s/giphy.gif" width="400" height="250" />
 
@@ -27,7 +27,7 @@ The app has security implementations such as password hashing, protection agains
 -   Searching for sitters by address
 -   Viewing pop-up profiles and detailed profiles
 -   Rating system andshowing the average point
--   Chat
+-   Private Chat
 -   Modify Sitter Profile Information
 -   Protection against CSURF and SQL injection
     attacks
